@@ -15,20 +15,14 @@ select{
     padding: 8px;
     border : none;
     border-radius: 5px;
-    background-color: darkcyan;
+    background-color: rgb(57, 196, 150);
     color: whitesmoke;
-}
-
-.select-items{
-    background-color: #f93d92;
-    color: azure;
-    font-weight: 700;
 }
 
 #play{
     margin-top: 15px;
     border: 1px solid #71d5e2;
-    background-color: #ade7ef;
+    background-color: #ebb6ce;
     border-radius: 10px;
     padding: 5px 10px;
     font-size: 1.2rem;
@@ -74,7 +68,7 @@ select{
     padding: 10px 12px 12px;
     border-style: none;
     border-radius: 25px;
-    background-color: #f93d92;
+    background-color: #ff63a9;
     color: antiquewhite;
     font-weight: 700;
     font-size: 1.3rem;
@@ -82,7 +76,7 @@ select{
 
 .question-button:disabled{
     background-color: lightgrey;
-    color: rgb(27, 167, 214);
+    color: rgb(214, 27, 114);
 }
 
 button:enabled{
