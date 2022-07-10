@@ -12,10 +12,35 @@
 </head>
 <body>
 
+    <header>
+        <div>
+            <h1>Welcome to my Word Game</h1>
+        </div>
+        <div class="level-selection">
+            Select a level :
+            <select name="level" id="level-selection">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+        <div>
+            <button id="play">
+                Play !
+            </button>
+        </div>
+    </header>
     <div class="app">
         <div class="question-area">
-            <h1>Welcome to my Word Game</h1>
-            <h3>Your score is : <span id="score-display"></span></h3>
+            <h3 id="level" >Level selected : <span id="level-display"></span></h3>
+            <h3 id="score" >Your score is : <span id="score-display"></span></h3>
             <div class="questions" id="questions-display">
             </div>
         </div>

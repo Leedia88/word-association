@@ -1,3 +1,11 @@
+
+document.querySelector("#play").addEventListener("click", function(){
+    const levelSelected = document.querySelector("#level-selection").value
+    getLevelQuestions(levelSelected)
+})
+
+function getLevelQuestions(levelSelected) {
+
 //Connect with Word API
 const data = null;
 
@@ -11,7 +19,7 @@ xhr.addEventListener("readystatechange", function () {
 });
 // Open a new connection, using GET request on the URL endpoint and custom the header to include Credentials with Origin (CORS requirement)
 
-xhr.open("GET", "https://twinword-word-association-quiz.p.rapidapi.com/type1/?level=5&area=sat");
+xhr.open("GET", `https://twinword-word-association-quiz.p.rapidapi.com/type1/?level=${levelSelected}&area=sat`);
 xhr.setRequestHeader('access-control-allow-origin', 'http://127.0.0.1')
 xhr.setRequestHeader("X-RapidAPI-Key", "f8dcafe8aamshbd9192a63f7c5afp145273jsn87edbf5dc48a");
 xhr.setRequestHeader("X-RapidAPI-Host", "twinword-word-association-quiz.p.rapidapi.com");
@@ -25,16 +33,16 @@ xhr.onload = function () {
     // Begin accessing JSON data here
     var dataDisplay = JSON.parse(this.response)
 
+    document.querySelector("#level-display").textContent = levelSelected
     const scoreDisplay = document.querySelector("#score-display");
     const questionDisplay = document.querySelector("#questions-display");
+    questionDisplay.innerHTML=""
     const questions = dataDisplay.quizlist
-    console.log(questions)
     
     let score = 0;
-    let clicked = []
-    
     scoreDisplay.textContent = score;
     
+    // Create boxes for each question
     function populateQuestions(){
         questions.forEach(question => {
             const questionBox = document.createElement('div');
@@ -58,7 +66,7 @@ xhr.onload = function () {
                 const questionButton = document.createElement('button')
                 questionButton.classList.add('question-button')
                 questionButton.textContent = option
-                questionButton.addEventListener('click', () => checkAnswer(questionBox, option, optionIndex + 1, question.correct))
+                questionButton.addEventListener('click', () => checkAnswer(questionBox, optionIndex + 1, question.correct))
                 questionButtons.append(questionButton)
             })
     
@@ -72,8 +80,8 @@ xhr.onload = function () {
     
     populateQuestions();
     
-    function checkAnswer(questionBox, option, optionIndex, answer){
-    
+
+    function checkAnswer(questionBox, optionIndex, answer){
         if (answer === optionIndex){
             score ++
             addResult(questionBox, "correct", "Well done, correct!")
@@ -82,12 +90,10 @@ xhr.onload = function () {
             addResult(questionBox, "wrong", "Wrong answer..")
         }
         scoreDisplay.textContent =score;
-        clicked.push(option)
-        console.log(clicked)
-        console.log(questionBox)
         questionBox.querySelectorAll(".question-button").forEach(button =>{
             button.disabled = 'true'
         })
+        questionBox.getElementsByClassName('question-button')[answer-1].classList.add('answer')
     }
     
     function addResult(questionBox, answerClass, answerText){
@@ -95,6 +101,6 @@ xhr.onload = function () {
         answerDisplay.classList.add(answerClass)
         answerDisplay.textContent= answerText
     }
-
-
   }
+
+}
